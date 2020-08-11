@@ -1,0 +1,31 @@
+﻿type Genre {
+  id: ID!
+  name: String!
+}
+
+type Person {
+  id: ID!
+  name: String!
+  picture: String
+}
+
+type Movie {
+  id: ID!
+  title: String!
+  cover: String!
+  poster: String!
+  description: String!
+  date: String!
+  duration: String!
+  rating: Float!
+  genres: [Genre!]!
+  cast: [Person!]!
+}
+
+type Query {
+  listMovies: [Movie!]!
+}
+
+schema {
+  query: Query
+}

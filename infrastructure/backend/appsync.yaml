@@ -1,0 +1,157 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  AppSync (GraphQL API, Schema, Key; DynamoDB data source, resolvers)
+
+Parameters:
+  Subdomain:
+    Default: ""
+    Type: String
+  Environment:
+    Default: prod
+    Type: String
+    AllowedValues: ["prod", "dev", "test"]
+    ConstraintDescription: must specify prod, dev, or test.
+  Domain:
+    Default: bestpicture.link
+    Type: String
+  MoviesTableName:
+    Default: Movies
+    Type: String
+  MoviesTableArn:
+    Type: String
+
+Conditions:
+  NoSubdomain: !Equals [!Ref Subdomain, ""]
+
+Resources:
+  GraphQLApi:
+    Type: AWS::AppSync::GraphQLApi
+    Properties:
+      Name: BestPicture
+      AuthenticationType: API_KEY
+      XrayEnabled: false
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Subdomain
+          Value: !Ref Subdomain
+        - Key: Project
+          Value: bestpicture
+  ApiKey:
+    Type: AWS::AppSync::ApiKey
+    DependsOn: GraphQLApi
+    Properties:
+      ApiId: !GetAtt GraphQLApi.ApiId
+      Description: API Key for bestpicture.link web app
+      Expires: 1609455599
+  GraphQLSchema:
+    Type: AWS::AppSync::GraphQLSchema
+    DependsOn: GraphQLApi
+    Properties:
+      ApiId: !GetAtt GraphQLApi.ApiId
+      DefinitionS3Location:
+        !If [
+          NoSubdomain,
+          !Sub "s3://devops.${Domain}/backend/AppSync/schema.graphql",
+          !Sub "s3://devops.${Subdomain}.${Domain}/backend/AppSync/schema.graphql",
+        ]
+  DataSourceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName:
+        !If [
+          NoSubdomain,
+          !Sub "appsync-dynamodb-data-source",
+          !Sub "${Subdomain}-appsync-dynamodb-data-source",
+        ]
+      Description: "Allows the AWS AppSync service to access your data source."
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - appsync.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      MaxSessionDuration: 3600
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Subdomain
+          Value: !Ref Subdomain
+        - Key: Project
+          Value: bestpicture
+  DataSourcePolicy:
+    Type: AWS::IAM::Policy
+    DependsOn: DataSourceRole
+    Properties:
+      PolicyName:
+        !If [
+          NoSubdomain,
+          !Sub "appsync-dynamodb-data-source",
+          !Sub "${Subdomain}-appsync-dynamodb-data-source",
+        ]
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:GetItem
+              - dynamodb:PutItem
+              - dynamodb:DeleteItem
+              - dynamodb:UpdateItem
+              - dynamodb:Query
+              - dynamodb:Scan
+              - dynamodb:BatchGetItem
+              - dynamodb:BatchWriteItem
+            Resource: !Ref MoviesTableArn
+      Roles:
+        - !Ref DataSourceRole
+  DynamoDBDataSource:
+    Type: AWS::AppSync::DataSource
+    DependsOn: GraphQLApi
+    Properties:
+      Name: Movies
+      Description: DynamoDB table backing the Movies object type.
+      ApiId: !GetAtt GraphQLApi.ApiId
+      Type: AMAZON_DYNAMODB
+      DynamoDBConfig:
+        AwsRegion: !Ref AWS::Region
+        TableName: !Ref MoviesTableName
+        UseCallerCredentials: false
+        Versioned: false
+      ServiceRoleArn: !GetAtt DataSourceRole.Arn
+  QueryListMoviesResolver:
+    Type: AWS::AppSync::Resolver
+    DependsOn:
+      - GraphQLApi
+      - GraphQLSchema
+    Properties:
+      ApiId: !GetAtt GraphQLApi.ApiId
+      DataSourceName: Movies
+      TypeName: Query
+      FieldName: listMovies
+      Kind: UNIT
+      RequestMappingTemplateS3Location:
+        !If [
+          NoSubdomain,
+          !Sub "s3://devops.${Domain}/backend/AppSync/resolvers/Query/listMovies/request.vm",
+          !Sub "s3://devops.${Subdomain}.${Domain}/backend/AppSync/resolvers/Query/listMovies/request.vm",
+        ]
+      ResponseMappingTemplateS3Location:
+        !If [
+          NoSubdomain,
+          !Sub "s3://devops.${Domain}/backend/AppSync/resolvers/Query/listMovies/response.vm",
+          !Sub "s3://devops.${Subdomain}.${Domain}/backend/AppSync/resolvers/Query/listMovies/response.vm",
+        ]
+
+Outputs:
+  Region:
+    Value: !Ref AWS::Region
+  GraphQLApiId:
+    Value: !GetAtt GraphQLApi.ApiId
+  GraphQLApiUrl:
+    Value: !GetAtt GraphQLApi.GraphQLUrl
+  ApiKey:
+    Value: !GetAtt ApiKey.ApiKey

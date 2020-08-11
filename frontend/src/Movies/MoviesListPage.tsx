@@ -33,11 +33,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MoviesListPage = () => {
   const classes = useStyles();
-  const { loading, data } = useQuery<MoviesData>(LIST_MOVIES);
+  const { loading, data, error } = useQuery<MoviesData>(LIST_MOVIES);
 
   return (
     <Container maxWidth="xl" className={classes.container}>
-      {loading &&
+      {(loading || error) &&
         Array.from(new Array(12)).map((_, index: number) => (
           <div key={index}>
             <MovieSkeleton />

@@ -100,7 +100,12 @@ const MovieCard = ({ movie }: Props) => {
           <Box display="flex" alignItems="flex-start">
             <Box width={1 / 3}>
               <Box mt={-15}>
-                <img src={movie.poster} alt={movie.title} width={150} />
+                <img
+                  src={movie.poster}
+                  alt={movie.title}
+                  width={150}
+                  height={218}
+                />
               </Box>
               <Box mt={1} ml={1}>
                 <AvatarGroup max={3}>

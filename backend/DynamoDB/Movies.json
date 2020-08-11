@@ -1,0 +1,690 @@
+{
+  "4560bce.Movies": [
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "gi-saeng-chung"
+          },
+          "title": {
+            "S": "Parasite"
+          },
+          "cover": {
+            "S": "/images/movies/gi-saeng-chung/cover.jpg"
+          },
+          "poster": {
+            "S": "/images/movies/gi-saeng-chung/poster.jpg"
+          },
+          "description": {
+            "S": "Kiedy Ki-woo dostaje pracę jako korepetytor córki zamożnego małżeństwa, wymyśla sposób na zapewnienie zatrudnienia również reszcie swojej rodziny."
+          },
+          "date": {
+            "S": "2019-05-21"
+          },
+          "duration": {
+            "S": "PT132M"
+          },
+          "rating": {
+            "N": "8.1"
+          },
+          "genres": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "dramat"
+                  },
+                  "name": {
+                    "S": "Dramat"
+                  }
+                }
+              }
+            ]
+          },
+          "directors": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "joon-ho-bong"
+                  },
+                  "name": {
+                    "S": "Joon-ho Bong"
+                  },
+                  "picture": {
+                    "S": "/images/movies/gi-saeng-chung/joon-ho-bong.jpg"
+                  }
+                }
+              }
+            ]
+          },
+          "countries": {
+            "L": [
+              {
+                "M": {
+                  "code": {
+                    "S": "KR"
+                  },
+                  "name": {
+                    "S": "Korea Południowa"
+                  }
+                }
+              }
+            ]
+          },
+          "cast": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "kang-ho-song"
+                  },
+                  "name": {
+                    "S": "Kang-ho Song"
+                  },
+                  "picture": {
+                    "S": "/images/movies/gi-saeng-chung/kang-ho-song.jpg"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "seon-gyun-lee"
+                  },
+                  "name": {
+                    "S": "Seon-gyun Lee"
+                  },
+                  "picture": {
+                    "S": "/images/movies/gi-saeng-chung/seon-gyun-lee.jpg"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "green-book"
+          },
+          "title": {
+            "S": "Green Book"
+          },
+          "cover": {
+            "S": "/images/movies/green-book/cover.jpg"
+          },
+          "poster": {
+            "S": "/images/movies/green-book/poster.jpg"
+          },
+          "description": {
+            "S": "Drobny cwaniaczek z Bronksu zostaje szoferem ekstrawaganckiego muzyka z wyższych sfer i razem wyruszają na wielotygodniowe tournée."
+          },
+          "date": {
+            "S": "2018-09-11"
+          },
+          "duration": {
+            "S": "PT130M"
+          },
+          "rating": {
+            "N": "8.2"
+          },
+          "genres": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "dramat"
+                  },
+                  "name": {
+                    "S": "Dramat"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "komedia"
+                  },
+                  "name": {
+                    "S": "Komedia"
+                  }
+                }
+              }
+            ]
+          },
+          "directors": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "peter-farrelly"
+                  },
+                  "name": {
+                    "S": "Peter Farrelly"
+                  },
+                  "picture": {
+                    "S": "/images/movies/green-book/peter-farrelly.jpg"
+                  }
+                }
+              }
+            ]
+          },
+          "countries": {
+            "L": [
+              {
+                "M": {
+                  "code": {
+                    "S": "US"
+                  },
+                  "name": {
+                    "S": "USA"
+                  }
+                }
+              }
+            ]
+          },
+          "cast": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "viggo-mortensen"
+                  },
+                  "name": {
+                    "S": "Viggo Mortensen"
+                  },
+                  "picture": {
+                    "S": "/images/movies/green-book/viggo-mortensen.jpg"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "mahershala-ali"
+                  },
+                  "name": {
+                    "S": "Mahershala Ali"
+                  },
+                  "picture": {
+                    "S": "/images/movies/green-book/mahershala-ali.jpg"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "the-shape-of-water"
+          },
+          "title": {
+            "S": "Kształt wody"
+          },
+          "cover": {
+            "S": "/images/movies/the-shape-of-water/cover.jpg"
+          },
+          "poster": {
+            "S": "/images/movies/the-shape-of-water/poster.jpg"
+          },
+          "description": {
+            "S": "Niema Elisa Esposito pracuje jako woźna w tajnym rządowym laboratorium. Jej życie ulega nagłej zmianie, gdy odkrywa pilnie strzeżony sekret."
+          },
+          "date": {
+            "S": "2017-08-31"
+          },
+          "duration": {
+            "S": "PT119M"
+          },
+          "rating": {
+            "N": "6.4"
+          },
+          "genres": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "fantasy"
+                  },
+                  "name": {
+                    "S": "Fantasy"
+                  }
+                }
+              }
+            ]
+          },
+          "directors": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "guillermo-del-toro"
+                  },
+                  "name": {
+                    "S": "Guillermo del Toro"
+                  },
+                  "picture": {
+                    "S": "/images/movies/the-shape-of-water/guillermo-del-toro.jpg"
+                  }
+                }
+              }
+            ]
+          },
+          "countries": {
+            "L": [
+              {
+                "M": {
+                  "code": {
+                    "S": "US"
+                  },
+                  "name": {
+                    "S": "USA"
+                  }
+                }
+              }
+            ]
+          },
+          "cast": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "sally-hawkins"
+                  },
+                  "name": {
+                    "S": "Sally Hawkins"
+                  },
+                  "picture": {
+                    "S": "/images/movies/the-shape-of-water/sally-hawkins.jpg"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "michael-shannon"
+                  },
+                  "name": {
+                    "S": "Michael Shannon"
+                  },
+                  "picture": {
+                    "S": "/images/movies/the-shape-of-water/michael-shannon.jpg"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "moonlight"
+          },
+          "title": {
+            "S": "Moonlight"
+          },
+          "cover": {
+            "S": "/images/movies/moonlight/cover.jpg"
+          },
+          "poster": {
+            "S": "/images/movies/moonlight/poster.jpg"
+          },
+          "description": {
+            "S": "Czarnoskóry chłopak próbuje się odnaleźć w niebezpiecznym świecie narkotyków i przeciwstawić życiowym problemom."
+          },
+          "date": {
+            "S": "2016-09-02"
+          },
+          "duration": {
+            "S": "PT111M"
+          },
+          "rating": {
+            "N": "6.6"
+          },
+          "genres": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "dramat"
+                  },
+                  "name": {
+                    "S": "Dramat"
+                  }
+                }
+              }
+            ]
+          },
+          "directors": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "barry-jenkins"
+                  },
+                  "name": {
+                    "S": "Barry Jenkins"
+                  },
+                  "picture": {
+                    "S": "/images/movies/moonlight/barry-jenkins.jpg"
+                  }
+                }
+              }
+            ]
+          },
+          "countries": {
+            "L": [
+              {
+                "M": {
+                  "code": {
+                    "S": "US"
+                  },
+                  "name": {
+                    "S": "USA"
+                  }
+                }
+              }
+            ]
+          },
+          "cast": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "trevante-rhodes"
+                  },
+                  "name": {
+                    "S": "Trevante Rhodes"
+                  },
+                  "picture": {
+                    "S": "/images/movies/moonlight/trevante-rhodes.jpg"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "andre-holland"
+                  },
+                  "name": {
+                    "S": "André Holland"
+                  },
+                  "picture": {
+                    "S": "/images/movies/moonlight/andre-holland.jpg"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "spotlight"
+          },
+          "title": {
+            "S": "Spotlight"
+          },
+          "cover": {
+            "S": "/images/movies/spotlight/cover.jpg"
+          },
+          "poster": {
+            "S": "/images/movies/spotlight/poster.jpg"
+          },
+          "description": {
+            "S": "Dziennikarze bostońskiej gazety trafiają na trop wielkiego pedofilskiego skandalu w Kościele rzymskokatolickim."
+          },
+          "date": {
+            "S": "2015-09-03"
+          },
+          "duration": {
+            "S": "PT128M"
+          },
+          "rating": {
+            "N": "7.6"
+          },
+          "genres": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "dramat"
+                  },
+                  "name": {
+                    "S": "Dramat"
+                  }
+                }
+              }
+            ]
+          },
+          "directors": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "tom-mccarthy"
+                  },
+                  "name": {
+                    "S": "Tom McCarthy"
+                  },
+                  "picture": {
+                    "S": "/images/movies/spotlight/tom-mccarthy.jpg"
+                  }
+                }
+              }
+            ]
+          },
+          "countries": {
+            "L": [
+              {
+                "M": {
+                  "code": {
+                    "S": "US"
+                  },
+                  "name": {
+                    "S": "USA"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "code": {
+                    "S": "CA"
+                  },
+                  "name": {
+                    "S": "Kanada"
+                  }
+                }
+              }
+            ]
+          },
+          "cast": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "mark-ruffalo"
+                  },
+                  "name": {
+                    "S": "Mark Ruffalo"
+                  },
+                  "picture": {
+                    "S": "/images/movies/spotlight/mark-ruffalo.jpg"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "michael-keaton"
+                  },
+                  "name": {
+                    "S": "Michael Keaton"
+                  },
+                  "picture": {
+                    "S": "/images/movies/spotlight/michael-keaton.jpg"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "rachel-mcadams"
+                  },
+                  "name": {
+                    "S": "Rachel McAdams"
+                  },
+                  "picture": {
+                    "S": "/images/movies/spotlight/rachel-mcadams.jpg"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "birdman"
+          },
+          "title": {
+            "S": "Birdman"
+          },
+          "cover": {
+            "S": "/images/movies/birdman/cover.jpg"
+          },
+          "poster": {
+            "S": "/images/movies/birdman/poster.jpg"
+          },
+          "description": {
+            "S": "Zapomniany aktor, który niegdyś grał postać kultowego superbohatera, walczy ze swoim ego, próbując odzyskać sławę i rodzinę."
+          },
+          "date": {
+            "S": "2014-08-27"
+          },
+          "duration": {
+            "S": "PT119M"
+          },
+          "rating": {
+            "N": "7.2"
+          },
+          "genres": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "dramat"
+                  },
+                  "name": {
+                    "S": "Dramat"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "komedia"
+                  },
+                  "name": {
+                    "S": "Komedia"
+                  }
+                }
+              }
+            ]
+          },
+          "directors": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "alejandro-gonzalez-inarritu"
+                  },
+                  "name": {
+                    "S": "Alejandro González Iñárritu"
+                  },
+                  "picture": {
+                    "S": "/images/movies/birdman/alejandro-gonzalez-inarritu.jpg"
+                  }
+                }
+              }
+            ]
+          },
+          "countries": {
+            "L": [
+              {
+                "M": {
+                  "code": {
+                    "S": "US"
+                  },
+                  "name": {
+                    "S": "USA"
+                  }
+                }
+              }
+            ]
+          },
+          "cast": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "michael-keaton"
+                  },
+                  "name": {
+                    "S": "Michael Keaton"
+                  },
+                  "picture": {
+                    "S": "/images/movies/birdman/michael-keaton.jpg"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "zach-galifianakis"
+                  },
+                  "name": {
+                    "S": "Zach Galifianakis"
+                  },
+                  "picture": {
+                    "S": "/images/movies/birdman/zach-galifianakis.jpg"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "edward-norton"
+                  },
+                  "name": {
+                    "S": "Edward Norton"
+                  },
+                  "picture": {
+                    "S": "/images/movies/birdman/edward-norton.jpg"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

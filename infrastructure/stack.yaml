@@ -1,0 +1,129 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  Root Stack
+
+Parameters:
+  Subdomain:
+    Default: ""
+    Type: String
+  Environment:
+    Default: prod
+    Type: String
+    AllowedValues: ["prod", "dev", "test"]
+    ConstraintDescription: must specify prod, dev, or test.
+  Domain:
+    Default: bestpicture.link
+    Type: String
+  HostedZoneId:
+    Description: Hosted Zone ID in Route 53
+    Default: Z06329612CU86LT1FXZ7C
+    Type: String
+  CertificateArn:
+    Description: Certificate ARN from AWS Certificate Manager
+    Default: arn:aws:acm:us-east-1:699488813374:certificate/df4233c6-652d-46b9-8b19-3718a3e476c8
+    Type: String
+
+Conditions:
+  NoSubdomain: !Equals [!Ref Subdomain, ""]
+
+Resources:
+  WebApp:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Parameters:
+        Subdomain: !Ref Subdomain
+        Domain: !Ref Domain
+        Environment: !Ref Environment
+        HostedZoneId: !Ref HostedZoneId
+        CertificateArn: !Ref CertificateArn
+      TemplateURL:
+        !If [
+          NoSubdomain,
+          !Sub "https://s3.${AWS::Region}.amazonaws.com/devops.${Domain}/infrastructure/frontend/hosting/webapp.yaml",
+          !Sub "https://s3.${AWS::Region}.amazonaws.com/devops.${Subdomain}.${Domain}/infrastructure/frontend/hosting/webapp.yaml",
+        ]
+      TimeoutInMinutes: 15
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Subdomain
+          Value: !Ref Subdomain
+        - Key: Project
+          Value: bestpicture
+  DynamoDB:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Parameters:
+        Subdomain: !Ref Subdomain
+        Environment: !Ref Environment
+      TemplateURL:
+        !If [
+          NoSubdomain,
+          !Sub "https://s3.${AWS::Region}.amazonaws.com/devops.${Domain}/infrastructure/backend/dynamodb.yaml",
+          !Sub "https://s3.${AWS::Region}.amazonaws.com/devops.${Subdomain}.${Domain}/infrastructure/backend/dynamodb.yaml",
+        ]
+      TimeoutInMinutes: 15
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Subdomain
+          Value: !Ref Subdomain
+        - Key: Project
+          Value: bestpicture
+  AppSync:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: DynamoDB
+    Properties:
+      Parameters:
+        Subdomain: !Ref Subdomain
+        Domain: !Ref Domain
+        Environment: !Ref Environment
+        MoviesTableName: !GetAtt DynamoDB.Outputs.MoviesTableName
+        MoviesTableArn: !GetAtt DynamoDB.Outputs.MoviesTableArn
+      TemplateURL:
+        !If [
+          NoSubdomain,
+          !Sub "https://s3.${AWS::Region}.amazonaws.com/devops.${Domain}/infrastructure/backend/appsync.yaml",
+          !Sub "https://s3.${AWS::Region}.amazonaws.com/devops.${Subdomain}.${Domain}/infrastructure/backend/appsync.yaml",
+        ]
+      TimeoutInMinutes: 15
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Subdomain
+          Value: !Ref Subdomain
+        - Key: Project
+          Value: bestpicture
+
+Outputs:
+  # WebApp
+  WebAppStackRef:
+    Value: !Ref WebApp
+  WebAppDomainName:
+    Value: !GetAtt WebApp.Outputs.DomainName
+  WebAppDistributionId:
+    Value: !GetAtt WebApp.Outputs.DistributionId
+  WebAppBucketName:
+    Value: !GetAtt WebApp.Outputs.BucketName
+  WebAppUrl:
+    Value: !GetAtt WebApp.Outputs.Url
+  # DynamoDB
+  DynamoDBStackRef:
+    Value: !Ref DynamoDB
+  DynamoDBRegion:
+    Value: !GetAtt DynamoDB.Outputs.Region
+  DynamoDBMoviesTableName:
+    Value: !GetAtt DynamoDB.Outputs.MoviesTableName
+  DynamoDBMoviesTableArn:
+    Value: !GetAtt DynamoDB.Outputs.MoviesTableArn
+  # AppSync
+  AppSyncStackRef:
+    Value: !Ref AppSync
+  AppSyncRegion:
+    Value: !GetAtt AppSync.Outputs.Region
+  AppSyncGraphQLApiId:
+    Value: !GetAtt AppSync.Outputs.GraphQLApiId
+  AppSyncGraphQLApiUrl:
+    Value: !GetAtt AppSync.Outputs.GraphQLApiUrl
+  AppSyncApiKey:
+    Value: !GetAtt AppSync.Outputs.ApiKey

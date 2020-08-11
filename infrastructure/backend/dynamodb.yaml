@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  DynamoDB (Movies)
+
+Parameters:
+  Subdomain:
+    Default: ""
+    Type: String
+  Environment:
+    Default: prod
+    Type: String
+    AllowedValues: ["prod", "dev", "test"]
+    ConstraintDescription: must specify prod, dev, or test.
+
+Conditions:
+  NoSubdomain: !Equals [!Ref Subdomain, ""]
+
+Resources:
+  MoviesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !If [NoSubdomain, !Sub "Movies", !Sub "${Subdomain}.Movies"]
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: id
+          KeyType: "HASH"
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
+        - Key: Subdomain
+          Value: !Ref Subdomain
+        - Key: Project
+          Value: bestpicture
+
+Outputs:
+  Region:
+    Value: !Ref AWS::Region
+  MoviesTableName:
+    Value: !Ref MoviesTable
+  MoviesTableArn:
+    Value: !GetAtt MoviesTable.Arn
