@@ -27,14 +27,14 @@ Resources:
   GraphQLApi:
     Type: AWS::AppSync::GraphQLApi
     Properties:
-      Name: BestPicture
+      Name: !If [NoSubdomain, !Sub "${Domain}", !Sub "${Subdomain}.${Domain}"]
       AuthenticationType: API_KEY
       XrayEnabled: false
       Tags:
         - Key: Environment
           Value: !Ref Environment
         - Key: Subdomain
-          Value: !Ref Subdomain
+          Value: !If [NoSubdomain, !Sub "-", !Sub "${Subdomain}"]
         - Key: Project
           Value: bestpicture
   ApiKey:
@@ -79,7 +79,7 @@ Resources:
         - Key: Environment
           Value: !Ref Environment
         - Key: Subdomain
-          Value: !Ref Subdomain
+          Value: !If [NoSubdomain, !Sub "-", !Sub "${Subdomain}"]
         - Key: Project
           Value: bestpicture
   DataSourcePolicy:

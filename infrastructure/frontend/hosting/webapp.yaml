@@ -44,7 +44,7 @@ Resources:
         - Key: Environment
           Value: !Ref Environment
         - Key: Subdomain
-          Value: !Ref Subdomain
+          Value: !If [NoSubdomain, !Sub "-", !Sub "${Subdomain}"]
         - Key: Project
           Value: bestpicture
   PublicBucketPolicy:
@@ -118,7 +118,7 @@ Resources:
         - Key: Environment
           Value: !Ref Environment
         - Key: Subdomain
-          Value: !Ref Subdomain
+          Value: !If [NoSubdomain, !Sub "-", !Sub "${Subdomain}"]
         - Key: Project
           Value: bestpicture
   ARecordSet:

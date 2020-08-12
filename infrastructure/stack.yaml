@@ -22,6 +22,10 @@ Parameters:
     Description: Certificate ARN from AWS Certificate Manager
     Default: arn:aws:acm:us-east-1:699488813374:certificate/df4233c6-652d-46b9-8b19-3718a3e476c8
     Type: String
+  CertificateArnProd:
+    Description: Certificate ARN from AWS Certificate Manager
+    Default: arn:aws:acm:us-east-1:699488813374:certificate/7a739173-1fd8-43d9-b6eb-0d90567c5a14
+    Type: String
 
 Conditions:
   NoSubdomain: !Equals [!Ref Subdomain, ""]
@@ -35,7 +39,9 @@ Resources:
         Domain: !Ref Domain
         Environment: !Ref Environment
         HostedZoneId: !Ref HostedZoneId
-        CertificateArn: !Ref CertificateArn
+        CertificateArn:
+          !If [NoSubdomain, !Ref CertificateArnProd, !Ref CertificateArn]
+
       TemplateURL:
         !If [
           NoSubdomain,
@@ -47,7 +53,7 @@ Resources:
         - Key: Environment
           Value: !Ref Environment
         - Key: Subdomain
-          Value: !Ref Subdomain
+          Value: !If [NoSubdomain, !Sub "-", !Sub "${Subdomain}"]
         - Key: Project
           Value: bestpicture
   DynamoDB:
@@ -67,7 +73,7 @@ Resources:
         - Key: Environment
           Value: !Ref Environment
         - Key: Subdomain
-          Value: !Ref Subdomain
+          Value: !If [NoSubdomain, !Sub "-", !Sub "${Subdomain}"]
         - Key: Project
           Value: bestpicture
   AppSync:
@@ -91,7 +97,7 @@ Resources:
         - Key: Environment
           Value: !Ref Environment
         - Key: Subdomain
-          Value: !Ref Subdomain
+          Value: !If [NoSubdomain, !Sub "-", !Sub "${Subdomain}"]
         - Key: Project
           Value: bestpicture
 
