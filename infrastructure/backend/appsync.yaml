@@ -112,7 +112,7 @@ Resources:
     Type: AWS::AppSync::DataSource
     DependsOn: GraphQLApi
     Properties:
-      Name: Movies
+      Name: !If [NoSubdomain, !Sub "Movies", !Sub "_${Subdomain}_Movies"]
       Description: DynamoDB table backing the Movies object type.
       ApiId: !GetAtt GraphQLApi.ApiId
       Type: AMAZON_DYNAMODB
@@ -127,9 +127,11 @@ Resources:
     DependsOn:
       - GraphQLApi
       - GraphQLSchema
+      - DynamoDBDataSource
     Properties:
       ApiId: !GetAtt GraphQLApi.ApiId
-      DataSourceName: Movies
+      DataSourceName:
+        !If [NoSubdomain, !Sub "Movies", !Sub "_${Subdomain}_Movies"]
       TypeName: Query
       FieldName: listMovies
       Kind: UNIT

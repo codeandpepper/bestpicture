@@ -27,37 +27,7 @@ aws cloudformation create-stack --stack-name dev-4560bce --template-body file://
 aws cloudformation wait stack-create-complete --stack-name dev-4560bce
 ```
 
-4. Get needed stack outputs and set environment variables e.g. AppSync API URI and and key. You can go to AWS console or use this command:
-
-AppSyncGraphQLApiUrl
-
-```
-aws cloudformation describe-stacks --stack-name dev-4560bce --query "Stacks[0].Outputs[?OutputKey=='AppSyncGraphQLApiUrl'].OutputValue" --output text
-```
-
-```powershell
-$Env:REACT_APP_AWS_APPSYNC_GRAPHQL_API_URL = 'TODO'
-$Env:REACT_APP_AWS_APPSYNC_GRAPHQL_API_URL
-```
-
-AppSyncApiKey
-
-```
-aws cloudformation describe-stacks --stack-name dev-4560bce --query "Stacks[0].Outputs[?OutputKey=='AppSyncApiKey'].OutputValue" --output text
-```
-
-```powershell
-$Env:REACT_APP_AWS_APPSYNC_API_KEY = 'TODO'
-$Env:REACT_APP_AWS_APPSYNC_API_KEY
-```
-
-DynamoDBMoviesTableName
-
-```
-aws cloudformation describe-stacks --stack-name dev-4560bce --query "Stacks[0].Outputs[?OutputKey=='DynamoDBMoviesTableName'].OutputValue" --output text
-```
-
-WebAppBucketName
+4. Get needed stack outputs and set environment variables e.g. S3 Bucket name for static web hosting. You can go to AWS console or use this command:
 
 ```
 aws cloudformation describe-stacks --stack-name dev-4560bce --query "Stacks[0].Outputs[?OutputKey=='WebAppBucketName'].OutputValue" --output text
@@ -67,6 +37,12 @@ aws cloudformation describe-stacks --stack-name dev-4560bce --query "Stacks[0].O
 
 ```
 cd ..\backend\DynamoDB
+```
+
+Get DynamoDB Movies table name
+
+```
+aws cloudformation describe-stacks --stack-name dev-4560bce --query "Stacks[0].Outputs[?OutputKey=='DynamoDBMoviesTableName'].OutputValue" --output text
 ```
 
 Modify table name inside Movies.json
@@ -79,7 +55,31 @@ aws dynamodb batch-write-item --request-items file://Movies.json
 
 6. Build and deploy frontend
 
-Modify
+Get AppSync API URI and key and set environment variables
+
+```
+aws cloudformation describe-stacks --stack-name dev-4560bce --query "Stacks[0].Outputs[?OutputKey=='AppSyncGraphQLApiUrl'].OutputValue" --output text
+```
+
+```powershell
+$Env:REACT_APP_AWS_APPSYNC_GRAPHQL_API_URL = 'TODO'
+$Env:REACT_APP_AWS_APPSYNC_GRAPHQL_API_URL
+```
+
+```
+aws cloudformation describe-stacks --stack-name dev-4560bce --query "Stacks[0].Outputs[?OutputKey=='AppSyncApiKey'].OutputValue" --output text
+```
+
+```powershell
+$Env:REACT_APP_AWS_APPSYNC_API_KEY = 'TODO'
+$Env:REACT_APP_AWS_APPSYNC_API_KEY
+```
+
+Get S3 Bucket name for static web hosting
+
+```
+aws cloudformation describe-stacks --stack-name dev-4560bce --query "Stacks[0].Outputs[?OutputKey=='WebAppBucketName'].OutputValue" --output text
+```
 
 ```
 cd ..\..\frontend
@@ -108,37 +108,7 @@ aws cloudformation create-stack --stack-name prod --template-body file://stack.y
 aws cloudformation wait stack-create-complete --stack-name prod
 ```
 
-4. Get needed stack outputs and set environment variables e.g. AppSync API URI and and key. You can go to AWS console or use this command:
-
-AppSyncGraphQLApiUrl
-
-```
-aws cloudformation describe-stacks --stack-name prod --query "Stacks[0].Outputs[?OutputKey=='AppSyncGraphQLApiUrl'].OutputValue" --output text
-```
-
-```powershell
-$Env:REACT_APP_AWS_APPSYNC_GRAPHQL_API_URL = 'TODO'
-$Env:REACT_APP_AWS_APPSYNC_GRAPHQL_API_URL
-```
-
-AppSyncApiKey
-
-```
-aws cloudformation describe-stacks --stack-name prod --query "Stacks[0].Outputs[?OutputKey=='AppSyncApiKey'].OutputValue" --output text
-```
-
-```powershell
-$Env:REACT_APP_AWS_APPSYNC_API_KEY = 'TODO'
-$Env:REACT_APP_AWS_APPSYNC_API_KEY
-```
-
-DynamoDBMoviesTableName
-
-```
-aws cloudformation describe-stacks --stack-name prod --query "Stacks[0].Outputs[?OutputKey=='DynamoDBMoviesTableName'].OutputValue" --output text
-```
-
-WebAppBucketName
+4. Get needed stack outputs and set environment variables e.g. S3 Bucket name for static web hosting. You can go to AWS console or use this command:
 
 ```
 aws cloudformation describe-stacks --stack-name prod --query "Stacks[0].Outputs[?OutputKey=='WebAppBucketName'].OutputValue" --output text
@@ -148,6 +118,12 @@ aws cloudformation describe-stacks --stack-name prod --query "Stacks[0].Outputs[
 
 ```
 cd ..\backend\DynamoDB
+```
+
+Get DynamoDB Movies table name
+
+```
+aws cloudformation describe-stacks --stack-name prod --query "Stacks[0].Outputs[?OutputKey=='DynamoDBMoviesTableName'].OutputValue" --output text
 ```
 
 Modify table name inside Movies.json
@@ -160,7 +136,31 @@ aws dynamodb batch-write-item --request-items file://Movies.json
 
 6. Build and deploy frontend
 
-Modify
+Get AppSync API URI and key and set environment variables
+
+```
+aws cloudformation describe-stacks --stack-name prod --query "Stacks[0].Outputs[?OutputKey=='AppSyncGraphQLApiUrl'].OutputValue" --output text
+```
+
+```powershell
+$Env:REACT_APP_AWS_APPSYNC_GRAPHQL_API_URL = 'TODO'
+$Env:REACT_APP_AWS_APPSYNC_GRAPHQL_API_URL
+```
+
+```
+aws cloudformation describe-stacks --stack-name prod --query "Stacks[0].Outputs[?OutputKey=='AppSyncApiKey'].OutputValue" --output text
+```
+
+```powershell
+$Env:REACT_APP_AWS_APPSYNC_API_KEY = 'TODO'
+$Env:REACT_APP_AWS_APPSYNC_API_KEY
+```
+
+Get S3 Bucket name for static web hosting
+
+```
+aws cloudformation describe-stacks --stack-name prod --query "Stacks[0].Outputs[?OutputKey=='WebAppBucketName'].OutputValue" --output text
+```
 
 ```
 cd ..\..\frontend

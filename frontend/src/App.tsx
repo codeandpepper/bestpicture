@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="primary">
         <Toolbar>
           <LocalMoviesIcon />
           <Typography variant="h6" className={classes.title}>
